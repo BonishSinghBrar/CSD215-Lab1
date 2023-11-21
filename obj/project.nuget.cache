@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "MVonNu6xsUq5HF7fi1E0Ki0GZchOpJ5XtZv2Ll7Bmlz1Z7KwK5000NXJs57Sp3HGUkwkw42MB6gvoIq2w8vxng==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Bonish Singh BRAR\\.dotnet\\MyFsharpApp\\MyFSharpApp.fsproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Bonish Singh BRAR\\.nuget\\packages\\fsharp.core\\7.0.401\\fsharp.core.7.0.401.nupkg.sha512"
+  ],
+  "logs": []
+}
