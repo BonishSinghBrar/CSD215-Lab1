@@ -1,16 +1,26 @@
 type Coach = {
     Name: string
-    FormerPlayers: bool}
-type stats = {
-    win: int
-    lose: int}
-type team = {
+    FormerPlayer: bool
+}
+
+type Stats = {
+    Wins: int
+    Losses: int
+}
+
+type Team = {
     Name: string
     Coach: Coach
-    stats: stats}
-let team = [
-   {Name="Chicago Bulls", Coach = {Name="Billy Donovan"; formerplayer=true};Stats={ Wins= 2344;Losses= 2254 }}
-   {Name="Milwaukee Bucks", Coach = {Name="Adrian Griffin"; formerplayer=false};Stats={ Wins= 2340;Losses= 2103 }}
-   {Name="Chicago Bulls", Coach = {Name="Billy Donovan"; formerplayer=true};Stats={ Wins= 2344;Losses= 2254}}
-   {Name="Chicago Bulls", Coach = {Name="Billy Donovan"; formerplayer=true};Stats={ Wins= 2344;Losses= 2254}}
-   {Name="Chicago Bulls", Coach = {Name="Billy Donovan"; formerplayer=true};Stats={ Wins= 2344;Losses= 2254}}]
+    Stats: Stats
+}
+
+let teams : Team list = [
+    { Name = "Chicago Bulls"; Coach = { Name = "Billy Donovan"; FormerPlayer = true }; Stats = { Wins = 2344; Losses = 2254 } }
+    { Name = "Milwaukee Bucks"; Coach = { Name = "Adrian Griffin"; FormerPlayer = false }; Stats = { Wins = 2340; Losses = 2103 } }
+    { Name = "Los Angeles Lakers"; Coach = { Name = "Frank Vogel"; FormerPlayer = false }; Stats = { Wins = 2400; Losses = 2200 } }
+    { Name = "Miami Heat"; Coach = { Name = "Erik Spoelstra"; FormerPlayer = true }; Stats = { Wins = 2400; Losses = 2000 } }
+]
+
+let goodTeam = teams |> List.maxBy (fun team -> team.Stats.Wins)
+
+printfn "Team with Maximum Wins: %s" goodTeam.Name
