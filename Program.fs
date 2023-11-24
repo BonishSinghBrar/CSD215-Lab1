@@ -51,7 +51,6 @@ printfn "Team with the Highest Success Rate: %s" teamWithHighestSuccessRate.Name
 type Cuisine =
     | Korean
     | Turkish
-
 type MovieType =
     | Regular
     | IMAX
@@ -59,7 +58,6 @@ type MovieType =
     | RegularWithSnacks
     | IMAXWithSnacks
     | DBOXWithSnacks
-
 type Activity =
     | BoardGame
     | Chill
@@ -69,20 +67,22 @@ type Activity =
 let calculateBudget (activity : Activity) : float =
     match activity with
     | BoardGame -> 0.0
-    | Chill -> 0.0
+    | Chill -> 0.0 
     | Movie movieType ->
         match movieType with
         | Regular -> 12.0
         | IMAX -> 17.0
         | DBOX -> 20.0
-        | RegularWithSnacks 
-        | IMAXWithSnacks 
+        | RegularWithSnacks -> 12.0 + 5.0
+        | IMAXWithSnacks -> 12.0 + 5.0
         | DBOXWithSnacks -> 12.0 + 5.0
     | Restaurant cuisine ->
         match cuisine with
         | Korean -> 70.0
         | Turkish -> 65.0
     | LongDrive (distance, fuelCostPerKm) -> float distance * fuelCostPerKm
-let chosenActivity = Movie DBOX
-let budget = calculateBudget chosenActivity
-printfn "Budget for chosen activity: %f CAD" budget
+let calculateTotalBudget (activities : Activity list) : float =
+    activities |> List.sumBy calculateBudget
+let activities = [Movie IMAXWithSnacks; Restaurant Turkish; LongDrive (100, 1)]
+let totalBudget = calculateTotalBudget activities
+printfn "Total Budget for chosen activities: %f CAD" totalBudget
