@@ -19,12 +19,20 @@ let teams : Team list = [
     { Name = "Milwaukee Bucks"; Coach = { Name = "Adrian Griffin"; FormerPlayer = false }; Stats = { Wins = 2340; Losses = 2103 } }
     { Name = "Los Angeles Lakers"; Coach = { Name = "Frank Vogel"; FormerPlayer = false }; Stats = { Wins = 2400; Losses = 2200 } }
     { Name = "Miami Heat"; Coach = { Name = "Erik Spoelstra"; FormerPlayer = true }; Stats = { Wins = 2300; Losses = 2000 } }
+    { Name = "Detroit Pistons"; Coach = { Name = "Monty Williams"; FormerPlayer = true }; Stats = { Wins = 2813; Losses = 3103 } }
 ]
+let goodTeams =
+    teams
+    |> List.filter (fun team -> team.Stats.Wins > team.Stats.Losses)
+    |> List.map (fun team -> team.Name)
+printfn "Good Teams : %A" goodTeams
 let calculateWinningPercentage team =
-    float team.Stats.Wins / float (team.Stats.Wins + team.Stats.Losses) * 100.0
-let bestTeams =
-    teams |> List.maxBy calculateWinningPercentage
-//let goodTeams =
-  //  teams |> List.filter (fun team -> team.Stats.Wins = bestTeams.Stats.Wins)
-printfn "Best Team by Winning Percentage: %s" bestTeams.Name
-//printfn "Good Teams: %A" goodTeams
+    match team.Stats.Wins + team.Stats.Losses with
+    | 0 -> 0.0
+    | totalGames -> float team.Stats.Wins / float totalGames * 100.0
+let teamsWithSuccessRate =
+    teams
+    |> List.map (fun team ->
+        let successRate = calculateWinningPercentage team
+        sprintf "%s: %.2f%%" team.Name successRate)
+printfn "Teams with Success Rates: %A" teamsWithSuccessRate
