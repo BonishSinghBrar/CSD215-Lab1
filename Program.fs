@@ -1,3 +1,6 @@
+//                                                                   QUESTION 1
+
+
 type Coach = {
     Name: string
     FormerPlayer: bool
@@ -36,3 +39,50 @@ let teamsWithSuccessRate =
         let successRate = calculateWinningPercentage team
         sprintf "%s: %.2f%%" team.Name successRate)
 printfn "Teams with Success Rates: %A" teamsWithSuccessRate
+let teamWithHighestSuccessRate =
+    teams
+    |> List.maxBy calculateWinningPercentage
+printfn "Team with the Highest Success Rate: %s" teamWithHighestSuccessRate.Name
+
+
+
+
+//                                                                        QUESTION 2
+type Cuisine =
+    | Korean
+    | Turkish
+
+type MovieType =
+    | Regular
+    | IMAX
+    | DBOX
+    | RegularWithSnacks
+    | IMAXWithSnacks
+    | DBOXWithSnacks
+
+type Activity =
+    | BoardGame
+    | Chill
+    | Movie of MovieType
+    | Restaurant of Cuisine
+    | LongDrive of int * float
+let calculateBudget (activity : Activity) : float =
+    match activity with
+    | BoardGame -> 0.0
+    | Chill -> 0.0
+    | Movie movieType ->
+        match movieType with
+        | Regular -> 12.0
+        | IMAX -> 17.0
+        | DBOX -> 20.0
+        | RegularWithSnacks 
+        | IMAXWithSnacks 
+        | DBOXWithSnacks -> 12.0 + 5.0
+    | Restaurant cuisine ->
+        match cuisine with
+        | Korean -> 70.0
+        | Turkish -> 65.0
+    | LongDrive (distance, fuelCostPerKm) -> float distance * fuelCostPerKm
+let chosenActivity = Movie DBOX
+let budget = calculateBudget chosenActivity
+printfn "Budget for chosen activity: %f CAD" budget
